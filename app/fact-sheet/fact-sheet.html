@@ -1,0 +1,57 @@
+<script> /** @type {AtomFactSheetController} */ let $ctrl; </script>
+<div class="fact-sheet__grid">
+
+    <atom-text ng-switch="$ctrl.property.type"  class="value-block___fact-sheets">
+        <span ng-switch-when="string|integer" ng-switch-when-separator="|">{{ $ctrl.property.value }}</span>
+        <span ng-switch-when="bool">
+            <fa-icon
+                ng-if="$ctrl.property.value"
+                icon="check"
+            ></fa-icon>
+            <fa-icon
+                ng-if="!$ctrl.property.value"
+                icon="minus"
+            ></fa-icon>
+        </span>
+        <span ng-switch-when="days">
+            {{ $ctrl.getDateTranslation() }}
+        </span>
+        <span ng-switch-when="gb|mb|mb_per_sec|sec|vcore_count|mbit_per_sec" ng-switch-when-separator="|">
+            <span>{{ $ctrl.property.value }}</span>
+            <span ng-if="$ctrl.property.type === 'gb'">GB</span>
+            <span ng-if="$ctrl.property.type === 'mb'">MB</span>
+            <span ng-if="$ctrl.property.type === 'mb_per_sec'" translate="TR_291019-36fd85_TR"></span>
+            <span ng-if="$ctrl.property.type === 'sec'" translate="TR_120919-7e4d09_TR"></span>
+            <span ng-if="$ctrl.property.type === 'vcore_count'">Core</span>
+            <span ng-if="$ctrl.property.type === 'mbit_per_sec'">Mbit/s</span>
+        </span>
+        <span ng-switch-when="stringArray" ng-repeat="part in $ctrl.property.value">
+            {{ part }}<br />
+        </span>
+        <span ng-switch-when="price">
+            {{ $ctrl.property.value }} EUR
+        </span>
+        <span ng-switch-when="price_per_period">
+            {{ $ctrl.property.value }}
+        </span>
+        <fa-icon
+            prefix="fas"
+            icon="{{ $ctrl.descriptionToggle ? 'chevron-up' : 'chevron-down' }}"
+            ng-if="$ctrl.property.description && $ctrl.property.description.length > 0"
+            ng-click="$ctrl.descriptionToggle = !$ctrl.descriptionToggle"
+        ></fa-icon>
+    </atom-text>
+    <div ng-if="$ctrl.descriptionToggle">
+        <div ng-if="$ctrl.descriptionIsArray">
+            <ul>
+                <li ng-repeat="descriptionEntry in $ctrl.property.description">
+                    {{ descriptionEntry }}
+                </li>
+            </ul>
+        </div>
+        <div ng-if="!$ctrl.descriptionIsArray">
+            {{ $ctrl.property.description }}
+        </div>
+    </div>
+
+</div>

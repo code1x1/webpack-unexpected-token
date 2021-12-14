@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["ESNext", "DOM", "ES2015"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["app/*"],
+      "test/*": ["test/*"]
+    },
+    "noImplicitAny": true
+  },
+  // "include": ["app/**/*.ts", "index.d.ts"],
+  "exclude": ["node_modules", "*.spec.ts"],
+  "linter-tslint": {
+    "useLocalTslint": true
+  }
+}
